@@ -40,6 +40,7 @@ import random
 
 mod = "mod4"
 terminal = "alacritty"
+HOME_DIR = os.path.expanduser('~')
 
 groups = [Group(i) for i in "123456789"]
 
@@ -109,7 +110,7 @@ def init_widget_list():
     return widgets_list
 
 def get_random_wallpaper():
-    path_to_wallpapers = '/usr/share/endeavouros/backgrounds/backgrounds/'
+    path_to_wallpapers = HOME_DIR+'/Pictures/backgrounds'
     files = os.listdir(path_to_wallpapers)
     return path_to_wallpapers + random.choice(files)
 
