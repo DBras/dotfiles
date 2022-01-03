@@ -55,3 +55,4 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 	\| PlugInstall --sync | source $MYVIMRC
 	\| endif
 
+:autocmd BufWritePost *.md silent !~/.config/nvim/savepdf.sh %:p

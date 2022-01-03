@@ -88,3 +88,6 @@ _open_files_for_editing() {
 alias maple='/opt/maple2021/bin/xmaple'
 alias dotconfig='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias fehr='feh -g 1280x720+1280 -.'
+
+colorscript random
+

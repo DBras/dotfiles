@@ -39,7 +39,7 @@ import subprocess
 import random
 
 mod = "mod4"
-terminal = "alacritty"
+TERMINAL = "alacritty"
 HOME_DIR = os.path.expanduser('~')
 
 groups = [Group(i) for i in "123456789"]
@@ -62,7 +62,7 @@ for i in groups:
 groups.append(
     ScratchPad("scratchpad", [
         DropDown("qalculate-gtk", "qalculate-gtk", width=0.5, x=0.25, y=0.2),
-        DropDown("term", "alacritty", width=0.75, height=0.5, x=0.125, y=0.2),
+        DropDown("term", TERMINAL, width=0.75, height=0.5, x=0.125, y=0.2),
     ]),
 )
 
@@ -110,7 +110,7 @@ def init_widget_list():
     return widgets_list
 
 def get_random_wallpaper():
-    path_to_wallpapers = HOME_DIR+'/Pictures/backgrounds'
+    path_to_wallpapers = HOME_DIR+'/Pictures/backgrounds/'
     files = os.listdir(path_to_wallpapers)
     return path_to_wallpapers + random.choice(files)
 
@@ -154,6 +154,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='eog'),
     Match(wm_class='feh'),
     Match(wm_class='qalculate-gtk'),
+    Match(title='JavaGUI'),
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
