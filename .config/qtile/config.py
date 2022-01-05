@@ -114,9 +114,10 @@ def get_random_wallpaper():
     files = os.listdir(path_to_wallpapers)
     return path_to_wallpapers + random.choice(files)
 
+wallpaper = get_random_wallpaper()
 screens = [
     Screen(
-        wallpaper=get_random_wallpaper(),
+        wallpaper=wallpaper,
         wallpaper_mode='stretch',
         top=bar.Bar(
             init_widget_list(),
@@ -125,6 +126,10 @@ screens = [
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     ),
+    Screen(
+        wallpaper=wallpaper,
+        wallpaper_mode='stretch',
+        ),
 ]
 
 # Drag floating layouts.
