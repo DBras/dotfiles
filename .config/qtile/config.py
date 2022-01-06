@@ -26,7 +26,7 @@
 
 from typing import List  # noqa: F401
 
-from libqtile import bar, layout, widget, extension, hook
+from libqtile import bar, layout, widget, extension, hook, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -101,10 +101,16 @@ def init_widget_list():
             },
             name_transform=lambda name: name.upper(),
         ),
+        widget.CheckUpdates(
+            update_interval = 1800,
+            distro = 'Arch_checkupdates',
+            display_format = '{updates} Updates',
+            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(TERMINAL + ' -e sudo pacman -Syu')},
+            ),
         widget.Systray(),
         widget.Clock(format='%Y-%m-%d %a %H:%M %p'),
-        widget.BatteryIcon(),
-        widget.Battery(format='{char} {percent:2.0%}'),
+        widget.BatteryIcon(mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('gnome-power-statistics')}),
+        widget.Battery(format='{char} {percent:2.0%}', mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('gnome-power-statistics')}),
         widget.QuickExit(default_text='[ log out ]'),
         ]
     return widgets_list
@@ -126,10 +132,6 @@ screens = [
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     ),
-    Screen(
-        wallpaper=wallpaper,
-        wallpaper_mode='stretch',
-        ),
 ]
 
 # Drag floating layouts.
@@ -160,6 +162,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='feh'),
     Match(wm_class='qalculate-gtk'),
     Match(title='JavaGUI'),
+    Match(wm_class='yad'),
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
