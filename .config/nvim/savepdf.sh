@@ -1,8 +1,11 @@
 #!/bin/sh
+echo -n "Input path: "
 echo $1
-echo ${1::-3}
+echo -n "Output path: "
+echo ${1::-3}'.pdf'
 OUTPUT=$(echo $1 | rev | cut -d'/' -f2- | rev )
 OUTPUT="${OUTPUT}/img/"
+echo -n "Image folder: "
 echo "${OUTPUT}"
 pandoc --pdf-engine=xelatex $1 \
 	-o ${1::-3}'.pdf' \
@@ -13,5 +16,5 @@ pandoc --pdf-engine=xelatex $1 \
 	-V monofont="DejaVu Sans Mono" \
 	--toc \
 	--resource-path=$OUTPUT \
-	-H disable_float.tex \
+	-H $HOME/.config/nvim/disable_float.tex \
 	&
