@@ -91,9 +91,18 @@ extension_defaults = widget_defaults.copy()
 
 def init_widget_list():
     widgets_list = [
+        widget.Sep(
+            linewidth = 0,
+            padding = 8,
+            ),
         widget.CurrentLayout(),
         widget.GroupBox(highlight_method='line'),
-        widget.Prompt(),
+        widget.TextBox(
+            text = '|',
+            font = 'Ubuntu Mono',
+            padding = 2,
+            fontsize = 19,
+            ),
         widget.WindowName(),
         widget.Chord(
             chords_colors={
@@ -109,9 +118,16 @@ def init_widget_list():
             ),
         widget.Systray(),
         widget.Clock(format='%Y-%m-%d %a %H:%M %p'),
+        widget.Volume(
+            fmt = 'Vol: {}',
+            padding = 5,
+            ),
         widget.BatteryIcon(mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('gnome-power-statistics')}),
         widget.Battery(format='{char} {percent:2.0%}', mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('gnome-power-statistics')}),
-        widget.QuickExit(default_text='[ log out ]'),
+        widget.Sep(
+            linewidth = 0,
+            padding = 8,
+            ),
         ]
     return widgets_list
 
