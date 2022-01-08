@@ -90,4 +90,4 @@ alias dotconfig='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias fehr='feh -g 1280x720+1280 -.'
 
 colorscript random
-
+eval "$(starship init bash)"
