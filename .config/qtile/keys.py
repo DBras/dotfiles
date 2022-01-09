@@ -1,22 +1,9 @@
 import subprocess
-from libqtile.config import Key 
+from libqtile.config import Key
 from libqtile.command import lazy
 from libqtile import extension
 
 mod = 'mod4'
-
-def backlight(action):
-    def f(qtile):
-        brightness = int(subprocess.run(['xbacklight', '-get'],
-                                        stdout=subprocess.PIPE).stdout)
-        if brightness != 1 or action != 'dec':
-            if (brightness > 49 and action == 'dec') \
-                                or (brightness > 39 and action == 'inc'):
-                subprocess.run(['xbacklight', f'-{action}', '10',
-                                '-fps', '10'])
-            else:
-                subprocess.run(['xbacklight', f'-{action}', '1'])
-    return f
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -141,4 +128,3 @@ keys = [
             desc='Toggle audio mute'
         ),
 ]
-
