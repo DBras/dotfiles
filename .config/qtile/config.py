@@ -31,9 +31,6 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, 
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
-from keys import keys
-import callbacks
-
 import os
 import subprocess
 import random
@@ -42,6 +39,7 @@ mod = "mod4"
 TERMINAL = "alacritty"
 HOME_DIR = os.path.expanduser('~')
 
+# Different colours to be used
 colors = [
         ['#1c1b22', '#1c1b22'], # Top bar background color, dark grey
         ['#c678dd', '#c678dd'], # Widget background 1, purple
@@ -49,23 +47,24 @@ colors = [
         ['#5f5faf', '#5f5faf'], # Widget background 2, dark purple / blue
         ]
 
-groups = [Group(i) for i in "123456789"]
+# Define workspaces and default layout
+groups = [
+        Group("TER", layout='columns'),
+        Group("WWW", layout='monadtall'),
+        Group("DEV", layout='monadtall'),
+        Group("SYS", layout='bsp'),
+        Group("COM", layout='max'),
+        Group("6", layout='columns'),
+        Group("7", layout='columns'),
+        ]
 
-for i in groups:
-    keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen(),
-            desc="Switch to group {}".format(i.name)),
+# Add simple key bindings for changing workspace
+# MOD + index: change focus to workspace
+# MOD + shift + index: send window to workspace
+from libqtile.dgroups import simple_key_binder
+dgroups_key_binder = simple_key_binder(mod)
 
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
-            desc="Switch to & move focused window to group {}".format(i.name)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-        #     desc="move focused window to group {}".format(i.name)),
-    ])
-
+# Add scratchpad group (technically accessible with MOD+8)
 groups.append(
     ScratchPad("scratchpad", [
         DropDown("qalculate-gtk", "qalculate-gtk", width=0.5, x=0.25, y=0.2),
@@ -73,10 +72,10 @@ groups.append(
     ]),
 )
 
+# Used layouts. Some are commented out
 layouts = [
     layout.Columns(border_focus_stack=['#d75f5f', '#8f3d3d'], border_width=4),
     layout.Max(),
-    # Try more layouts by unleashing below layouts.
      # layout.Stack(num_stacks=2),
      layout.Bsp(),
      # layout.Matrix(),
@@ -89,6 +88,7 @@ layouts = [
      # layout.Zoomy(),
 ]
 
+# Defaults for widgets - font type and size, padding, and background
 widget_defaults = dict(
     font='Ubuntu bold',
     fontsize=14,
@@ -97,6 +97,7 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+# Returns list of widgets so multiple screens are easier
 def init_widget_list():
     widgets_list = [
         widget.Sep(
@@ -174,11 +175,13 @@ def init_widget_list():
         ]
     return widgets_list
 
+# Returns path to random wallpaper
 def get_random_wallpaper():
     path_to_wallpapers = HOME_DIR+'/Pictures/backgrounds/'
     files = os.listdir(path_to_wallpapers)
     return path_to_wallpapers + random.choice(files)
 
+# Define wallpaper before screens so the screens share
 wallpaper = get_random_wallpaper()
 screens = [
     Screen(
@@ -202,11 +205,13 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front())
 ]
 
-dgroups_key_binder = None
+#dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
+
+# Rules for windows that float by default
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
     *layout.Floating.default_float_rules,
@@ -217,13 +222,14 @@ floating_layout = layout.Floating(float_rules=[
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
 
+    # Custom float rules
     Match(wm_class='eog'),
     Match(wm_class='feh'),
     Match(wm_class='qalculate-gtk'),
     Match(title='JavaGUI'),
     Match(wm_class='yad'),
 ])
-auto_fullscreen = True
+auto_fullscreen = True # Allow apps to enter fullscreen by default
 focus_on_window_activation = "smart"
 reconfigure_screens = True
 
@@ -231,6 +237,8 @@ reconfigure_screens = True
 # focus, should we respect this or not?
 auto_minimize = True
 
+# Run autostart.sh when qtile is started
+# Runs apps such as Dropbox
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')

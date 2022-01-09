@@ -28,9 +28,9 @@ keys = [
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h",
-        lazy.layout.shuffle_left(),
-        desc="Move window to the left"),
+#    Key([mod, "shift"], "h",
+#        lazy.layout.shuffle_left(),
+#        desc="Move window to the left"),
     Key([mod, "shift"], "l",
         lazy.layout.shuffle_right(),
         desc="Move window to the right"),
