@@ -10,3 +10,5 @@ error_symbol = "[➜](bold red)"
 [line_break]
 disabled=true
 
+[package]
+disabled=true
