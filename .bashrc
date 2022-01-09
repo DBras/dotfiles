@@ -88,6 +88,9 @@ _open_files_for_editing() {
 alias maple='/opt/maple2021/bin/xmaple'
 alias dotconfig='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias fehr='feh -g 1280x720+1280 -.'
+alias scrotclip='scrot -s ~/foo.png \
+	&& xclip -sel clip -t image/png ~/foo.png \
+	&& rm ~/foo.png'
 
 colorscript random
 eval "$(starship init bash)"
