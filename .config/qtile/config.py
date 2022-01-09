@@ -34,6 +34,7 @@ from libqtile.utils import guess_terminal
 import os
 import subprocess
 import random
+from keys import keys
 
 mod = "mod4"
 TERMINAL = "alacritty"
@@ -53,7 +54,9 @@ groups = [
         Group("WWW", layout='monadtall'),
         Group("DEV", layout='monadtall'),
         Group("SYS", layout='bsp'),
-        Group("COM", layout='max'),
+        Group("COM", layout='treetab', 
+            matches=[Match(wm_class=['Microsoft Teams - Preview']),
+                     Match(wm_class=['discord'])]),
         Group("6", layout='columns'),
         Group("7", layout='columns'),
         ]
@@ -77,13 +80,23 @@ layouts = [
     layout.Columns(border_focus_stack=['#d75f5f', '#8f3d3d'], border_width=4),
     layout.Max(),
      # layout.Stack(num_stacks=2),
-     layout.Bsp(),
+     layout.Bsp(
+         ),
      # layout.Matrix(),
-     layout.MonadTall(),
+     layout.MonadTall(
+         single_border_width = 0,
+         ratio = 0.6,
+         ),
      layout.MonadWide(),
      # layout.RatioTile(),
      # layout.Tile(),
-     layout.TreeTab(),
+     layout.TreeTab(
+         font = 'Ubuntu',
+         fontsize = 14,
+         section_fg = colors[0],
+         bg_color = colors[0],
+         active_bg = colors[1],
+         ),
      layout.VerticalTile(),
      # layout.Zoomy(),
 ]
@@ -206,7 +219,7 @@ mouse = [
 ]
 
 #dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
+#dgroups_app_rules = []  # type: List
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
