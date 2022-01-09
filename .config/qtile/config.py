@@ -51,7 +51,8 @@ colors = [
 # Define workspaces and default layout
 groups = [
         Group("TER", layout='columns'),
-        Group("WWW", layout='monadtall'),
+        Group("WWW", layout='monadtall',
+            matches=[Match(wm_class=['firefox'])]),
         Group("DEV", layout='monadtall'),
         Group("SYS", layout='bsp'),
         Group("COM", layout='treetab', 
@@ -149,6 +150,8 @@ def init_widget_list():
             format='%Y-%m-%d %a %H:%M %p',
             background = colors[1],
             padding = 0,
+            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('firefox https://calendar.google.com'),
+                'Button3': lambda: qtile.cmd_spawn("firefox 'ext+container:name=Work&url=https://calendar.google.com'")},
             ),
         widget.TextBox(
             text = '◢',
@@ -161,6 +164,7 @@ def init_widget_list():
             fmt = 'Vol: {}',
             padding = 0,
             background = colors[3],
+            mouse_callbacks = {'Button3': lambda: qtile.cmd_spawn('pavucontrol')},
             ),
         widget.TextBox(
             text = '◢',
