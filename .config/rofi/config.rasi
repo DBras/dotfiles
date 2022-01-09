@@ -1,3 +1,13 @@
+configuration {
+	display-drun: "Applications";
+	display-window: "Windows";
+	drun-display-format: "{icon} {name}";
+	show-icons: true;
+	icon-theme: "Papirus";
+}
+
+#element-icon {size: 2.65ch;}
+
 * {
     /* Dracula theme colour palette */
     drac-bgd: #282a36;
@@ -12,7 +22,7 @@
     drac-red: #ff5555;
     drac-yel: #f1fa8c;
 
-    font: "Jetbrains Mono 12";
+    font: "Jetbrains Mono 14";
 
     foreground: @drac-fgd;
     background: @drac-bgd;
