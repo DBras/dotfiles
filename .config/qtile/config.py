@@ -104,11 +104,9 @@ def init_widget_list():
             padding = 8,
             ),
         widget.CurrentLayout(),
-        widget.TextBox(
-            text = '|',
-            font = 'Ubuntu Mono',
-            padding = 2,
-            fontsize = 19,
+        widget.Sep(
+            foreground = '#ffffff',
+            linewidth = 2,
             ),
         widget.GroupBox(
             highlight_method='line',
