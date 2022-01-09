@@ -1,5 +1,12 @@
-[character]                            # The name of the module we are configuring is "character"
-success_symbol = "[➜](bold green)"  
+# Don't print new line at the start of the prompt
+add_newline = false 
 
+# Change character settings
+[character] 
+success_symbol = "[➜](bold green)"  
+error_symbol = "[➜](bold red)"
+
+# Line break: don't have the prompt in multiple lines
 [line_break]
 disabled=true
+
