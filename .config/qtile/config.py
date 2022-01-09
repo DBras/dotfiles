@@ -117,12 +117,6 @@ def init_widget_list():
             linewidth = 2,
             ),
         widget.WindowName(),
-        widget.Chord(
-            chords_colors={
-                'launch': ("#ff0000", "#ffffff"),
-            },
-            name_transform=lambda name: name.upper(),
-        ),
         widget.CheckUpdates(
             update_interval = 1800,
             distro = 'Arch_checkupdates',
