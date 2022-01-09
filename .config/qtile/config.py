@@ -42,6 +42,13 @@ mod = "mod4"
 TERMINAL = "alacritty"
 HOME_DIR = os.path.expanduser('~')
 
+colors = [
+        ['#1c1b22', '#1c1b22'], # Top bar background color, dark grey
+        ['#c678dd', '#c678dd'], # Widget background 1, purple
+        ['#46d9ff', '#46d9ff'], # Light purple
+        ['#5f5faf', '#5f5faf'], # Widget background 2, dark purple / blue
+        ]
+
 groups = [Group(i) for i in "123456789"]
 
 for i in groups:
@@ -86,6 +93,7 @@ widget_defaults = dict(
     font='Ubuntu bold',
     fontsize=14,
     padding=3,
+    background=colors[0],
 )
 extension_defaults = widget_defaults.copy()
 
@@ -96,12 +104,19 @@ def init_widget_list():
             padding = 8,
             ),
         widget.CurrentLayout(),
-        widget.GroupBox(highlight_method='line'),
         widget.TextBox(
             text = '|',
             font = 'Ubuntu Mono',
             padding = 2,
             fontsize = 19,
+            ),
+        widget.GroupBox(
+            highlight_method='line',
+            this_current_screen_border = colors[1],
+            ),
+        widget.Sep(
+            foreground = '#ffffff',
+            linewidth = 2,
             ),
         widget.WindowName(),
         widget.Chord(
@@ -116,17 +131,53 @@ def init_widget_list():
             display_format = '{updates} Updates',
             mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(TERMINAL + ' -e sudo pacman -Syu')},
             ),
-        widget.Systray(),
-        widget.Clock(format='%Y-%m-%d %a %H:%M %p'),
+        widget.Systray(
+            ),
+        widget.TextBox(
+            text = '◢',
+            fontsize = 43,
+            foreground = colors[1],
+            padding = 0,
+            ),
+        widget.Clock(
+            format='%Y-%m-%d %a %H:%M %p',
+            background = colors[1],
+            padding = 0,
+            ),
+        widget.TextBox(
+            text = '◢',
+            fontsize = 43,
+            foreground = colors[3],
+            background = colors[1],
+            padding = 0,
+            ),
         widget.Volume(
             fmt = 'Vol: {}',
-            padding = 5,
+            padding = 0,
+            background = colors[3],
             ),
-        widget.BatteryIcon(mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('gnome-power-statistics')}),
-        widget.Battery(format='{char} {percent:2.0%}', mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('gnome-power-statistics')}),
-        widget.Sep(
-            linewidth = 0,
-            padding = 8,
+        widget.TextBox(
+            text = '◢',
+            fontsize = 43,
+            foreground = colors[1],
+            background = colors[3],
+            padding = 0,
+            ),
+        widget.BatteryIcon(
+            mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('gnome-power-statistics')},
+            background = colors[1],
+            ),
+        widget.Battery(
+            format='{char} {percent:2.0%}', 
+            mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('gnome-power-statistics')},
+            background = colors[1],
+            ),
+        widget.TextBox(
+            text = '◢',
+            fontsize = 43,
+            foreground = colors[3],
+            background = colors[1],
+            padding = 0,
             ),
         ]
     return widgets_list
