@@ -50,12 +50,12 @@ colors = [
 
 # Define workspaces and default layout
 groups = [
-        Group("TER", layout='columns'),
+        Group("TER", layout='bsp'),
         Group("WWW", layout='monadtall',
             matches=[Match(wm_class=['firefox'])]),
         Group("DEV", layout='monadtall',
             matches=[Match(wm_class=['jetbrains-idea-ce'])]),
-        Group("SYS", layout='bsp'),
+        Group("SYS", layout='columns'),
         Group("COM", layout='treetab', 
             matches=[Match(wm_class=['Microsoft Teams - Preview']),
                      Match(wm_class=['discord'])]),
@@ -144,7 +144,20 @@ def init_widget_list():
         widget.TextBox(
             text = '◢',
             fontsize = 43,
+            foreground = colors[3],
+            padding = 0,
+            ),
+        widget.Wlan(
+            format = '{essid} {percent:2.0%}',
+            background = colors[3],
+            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('/home/daniel/.local/bin/wifimenu'),
+                                'Button3': lambda: qtile.cmd_spawn('gnome-nettool')},
+            ),
+        widget.TextBox(
+            text = '◢',
+            fontsize = 43,
             foreground = colors[1],
+            background = colors[3],
             padding = 0,
             ),
         widget.Clock(
