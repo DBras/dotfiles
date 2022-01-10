@@ -92,5 +92,6 @@ alias scrotclip='scrot -s ~/foo.png \
 	&& xclip -sel clip -t image/png ~/foo.png \
 	&& rm ~/foo.png'
 
-colorscript random
-eval "$(starship init bash)"
+export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
+colorscript random # Print random colorscript on start
+eval "$(starship init bash)" # Start starship prompt
