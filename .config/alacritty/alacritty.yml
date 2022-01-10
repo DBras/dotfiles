@@ -1,0 +1,18 @@
+import:
+  - /home/daniel/.config/dracula.yml
+font:
+  size: 10.0
+  normal:
+    family: SourceCodePro
+    style: Regular
+  bold:
+    family: SourceCodePro
+    style: Bold
+  italic:
+    family: SourceCodePro
+    style: Italic
+  bold_italic:
+    family: SourceCodePro
+    style: Bold Italic
+key_bindings:
+  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }
