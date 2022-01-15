@@ -54,7 +54,8 @@ nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 
 nmap <F8> :TagbarToggle<CR>
 
-luafile ~/.config/nvim/lua/compe-config.lua " Source compe config lua file
+" Source lua file with compe config
+luafile ~/.config/nvim/lua/compe-config.lua
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))   " Auto-install plugin manager if not present
 	silent !curl -flo ~/.config/nvim/autoload/plug.vim --create-dirs
