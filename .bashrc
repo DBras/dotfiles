@@ -30,11 +30,6 @@ ShowInstallerIsoInfo() {
     fi
 }
 
-
-alias ls='ls --color=auto'
-alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
-alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
-
 [[ "$(whoami)" = "root" ]] && return
 
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
@@ -91,6 +86,10 @@ alias fehr='feh -g 1280x720+1280 -.'
 alias scrotclip='scrot -s ~/foo.png \
 	&& xclip -sel clip -t image/png ~/foo.png \
 	&& rm ~/foo.png'
+alias ls='ls --color=auto'
+alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
+alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
+alias la='ls -A'
 
 export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
 colorscript random # Print random colorscript on start
