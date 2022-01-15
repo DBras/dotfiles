@@ -91,6 +91,7 @@ alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
 alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
 alias la='ls -A'
 alias altcode="$HOME/.local/bin/altcode-master/altcode -o clipboard -s rofi"
+alias sshot="scrot --select ~/Pictures/scrot/temporary.png && xclip -se c -t image/png -i ~/Pictures/scrot/temporary.png && rm ~/Pictures/scrot/temporary.png"
 
 export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
 colorscript random # Print random colorscript on start
