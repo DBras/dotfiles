@@ -9,6 +9,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set noexpandtab
+set smartcase
 set autoindent
 set clipboard+=unnamedplus
 set mouse=a
@@ -20,6 +21,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
 Plug 'dracula/vim'
 Plug 'tc50cal/vim-terminal'
