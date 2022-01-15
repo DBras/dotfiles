@@ -26,8 +26,8 @@ Plug 'preservim/nerdtree'
 Plug 'dracula/vim'
 Plug 'tc50cal/vim-terminal'
 Plug 'preservim/tagbar'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
 
 call plug#end()
 
@@ -37,15 +37,24 @@ EOF
 
 :colorscheme dracula
 
+" NerdTree
 nnoremap <C-f> :NERDTreeFocus<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 nnoremap <C-s> :tabedit 
+" LSP 
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> m <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 
 nmap <F8> :TagbarToggle<CR>
 
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
+
+luafile ~/.config/nvim/lua/compe-config.lua
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
 	silent !curl -flo ~/.config/nvim/autoload/plug.vim --create-dirs
