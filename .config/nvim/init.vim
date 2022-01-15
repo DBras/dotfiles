@@ -18,6 +18,11 @@ set foldmethod=indent             " Indenting can fold
 set foldlevel=9                   " Default fold level
 set pumheight=7                   " Popup menu height
 set updatetime=300                " How often to write to buffer. Default 4000
+set undofile                      " Set persistent undo
+set numberwidth=2                 " Width of number column. Default 4. Larger if necessary
+set nowrap                        " Too large line is not wrapped
+set showmatch                     " Show matching parenthesis when adding
+set matchtime=4                   " For how long is match shown?
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
