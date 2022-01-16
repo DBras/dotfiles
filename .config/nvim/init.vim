@@ -59,7 +59,7 @@ nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> m <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 " UltiSnips
-let g:UltiSnipsExpandTrigger = '<C-s>'
+let g:UltiSnipsExpandTrigger = '<C-Space>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 let g:UltiSnipsEditSplit= "vertical"
@@ -83,4 +83,4 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 	\| endif
 
 " If document is markdown, convert to pdf
-:autocmd BufWritePost *.md silent !$HOME/.config/nvim/savepdf.sh %:p
+:autocmd BufWritePost *.md silent !$HOME/.config/nvim/markdown/savepdf.sh %:p
