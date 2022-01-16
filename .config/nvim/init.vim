@@ -23,6 +23,8 @@ set numberwidth=2                 " Width of number column. Default 4. Larger if
 set nowrap                        " Too large line is not wrapped
 set showmatch                     " Show matching parenthesis when adding
 set matchtime=4                   " For how long is match shown?
+set spell                         " Enable spell checking
+set spelllang=en_gb,da            " Spell check UK english and danish
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
@@ -72,4 +74,5 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) " 
 	\| PlugInstall --sync | source $MYVIMRC
 	\| endif
 
-:autocmd BufWritePost *.md silent !$HOME/.config/nvim/savepdf.sh %:p          " If saving markdown, convert to PDF
+" If document is markdown, convert to pdf
+:autocmd BufWritePost *.md silent !$HOME/.config/nvim/savepdf.sh %:p
