@@ -36,13 +36,21 @@ Plug 'dracula/vim'                " Colour scheme
 Plug 'preservim/tagbar'           " Use ctags to display overview of tags
 Plug 'neovim/nvim-lspconfig'      " NeoVim LSP plugin
 Plug 'hrsh7th/nvim-compe'         " Plugin for LSP autocomplete
-Plug 'sirver/UltiSnips'
+Plug 'sirver/UltiSnips'           " Add support for snippets
+Plug 'nvim-treesitter/nvim-treesitter' " Tree sitter plugin
 
 call plug#end()
 
 " Execute below as lua. Enables python LSP server
 lua << EOF
 require'lspconfig'.pyright.setup{}
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+	disable = {"vim"},
+  },
+}
 EOF
 
 :colorscheme dracula              " Set colour scheme to Dracula
