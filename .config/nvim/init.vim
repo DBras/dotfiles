@@ -23,7 +23,6 @@ set numberwidth=2                 " Width of number column. Default 4. Larger if
 set nowrap                        " Too large line is not wrapped
 set showmatch                     " Show matching parenthesis when adding
 set matchtime=4                   " For how long is match shown?
-set spell                         " Enable spell checking
 set spelllang=en_gb,da            " Spell check UK English and Danish
 call plug#begin('~/.config/nvim/autoload/plugged')
 
@@ -35,7 +34,11 @@ Plug 'preservim/nerdtree'         " File tree
 Plug 'dracula/vim'                " Colour scheme
 Plug 'preservim/tagbar'           " Use ctags to display overview of tags
 Plug 'neovim/nvim-lspconfig'      " NeoVim LSP plugin
-Plug 'hrsh7th/nvim-compe'         " Plugin for LSP autocomplete
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'sirver/UltiSnips'           " Add support for snippets
 Plug 'nvim-treesitter/nvim-treesitter' " Tree sitter plugin
 
@@ -43,7 +46,7 @@ call plug#end()
 
 " Execute below as lua. Enables python LSP server
 lua << EOF
-require'lspconfig'.pyright.setup{}
+-- require'lspconfig'.pyright.setup{}
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
@@ -72,11 +75,9 @@ let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 let g:UltiSnipsEditSplit= "vertical"
 
+luafile ~/.config/nvim/lua/nvim-cmp.lua
 
 nmap <F8> :TagbarToggle<CR>
-
-" Source lua file with compe config
-luafile ~/.config/nvim/lua/compe-config.lua
 
 " Auto install plugin manager if not present
 if empty(glob('~/.config/nvim/autoload/plug.vim'))   

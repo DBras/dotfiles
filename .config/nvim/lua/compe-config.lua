@@ -4,10 +4,11 @@ require'compe'.setup {
   enabled = true;
   autocomplete = true;
   debug = false;
-  min_length = 1;
+  min_length = 2;
   preselect = 'enable';
   throttle_time = 80;
   source_timeout = 200;
+  resolve_timeout = 800;
   incomplete_delay = 400;
   max_abbr_width = 100;
   max_kind_width = 100;
@@ -17,11 +18,9 @@ require'compe'.setup {
   source = {
     path = true;
     buffer = true;
-    calc = true;
     nvim_lsp = true;
     nvim_lua = true;
     spell = true;
-    tags = true;
 	ultisnips = true;
   };
 }
@@ -31,11 +30,7 @@ end
 
 local check_back_space = function()
     local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
+	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
 
 -- Use (s-)tab to:
@@ -44,8 +39,6 @@ end
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
---  elseif vim.fn.call("vsnip#available", {1}) == 1 then
---    return t "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
     return t "<Tab>"
   else
@@ -55,8 +48,6 @@ end
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-p>"
---  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
---    return t "<Plug>(vsnip-jump-prev)"
   else
     -- If <S-Tab> is not working in your terminal, change it to <C-h>
     return t "<S-Tab>"
