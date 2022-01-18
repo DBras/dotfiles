@@ -1,5 +1,5 @@
 snippet img "Insert image" b
-![${1:Title}](${2:path})
+![${1:Title}\label{fig:${2:figtitle}}](${3:path})
 $3
 endsnippet
 
@@ -9,4 +9,22 @@ endsnippet
 
 snippet dateh "Insert current date" b
 > Date: `date +%d.%m.%y`
+endsnippet
+
+snippet titleh "Insert title, author and date" i 
+% ${1:Title}
+% Daniel Brasholt
+% Date: `date +%d.%m.%y`
+
+# $1
+
+$2
+endsnippet
+
+snippet noteh "Insert title and date"
+# ${1:Title}
+
+> `date +"%A %d.%m.%y"`
+
+$2
 endsnippet

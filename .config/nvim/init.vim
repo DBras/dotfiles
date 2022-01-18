@@ -24,6 +24,8 @@ set nowrap                        " Too large line is not wrapped
 set showmatch                     " Show matching parenthesis when adding
 set matchtime=4                   " For how long is match shown?
 set spelllang=en_gb,da            " Spell check UK English and Danish
+set textwidth=80                  " Used by colour column
+set colorcolumn=+1                " Show column at text width +1
 call plug#begin('~/.config/nvim/autoload/plugged')
 
 Plug 'vim-airline/vim-airline'    " Bottom airline
@@ -34,11 +36,11 @@ Plug 'preservim/nerdtree'         " File tree
 Plug 'dracula/vim'                " Colour scheme
 Plug 'preservim/tagbar'           " Use ctags to display overview of tags
 Plug 'neovim/nvim-lspconfig'      " NeoVim LSP plugin
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'hrsh7th/cmp-nvim-lsp'       " LSP plugin for cmp
+Plug 'hrsh7th/cmp-buffer'         " Buffer plugin for cmp
+Plug 'hrsh7th/cmp-path'           " Path plugin for cmp
+Plug 'hrsh7th/nvim-cmp'           " cmp: completion plugin
+Plug 'quangnguyen30192/cmp-nvim-ultisnips' " UltiSnips plugin for cmp
 Plug 'sirver/UltiSnips'           " Add support for snippets
 Plug 'nvim-treesitter/nvim-treesitter' " Tree sitter plugin
 
@@ -92,4 +94,4 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 	\| endif
 
 " If document is markdown, convert to pdf
-:autocmd BufWritePost *.md silent !$HOME/.config/nvim/markdown/savepdf.sh %:p
+:autocmd BufWritePost *.md silent !$HOME/.config/nvim/markdown/savepdf.sh "%:p"
