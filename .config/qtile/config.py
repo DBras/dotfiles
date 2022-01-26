@@ -55,12 +55,13 @@ groups = [
             matches=[Match(wm_class=['firefox'])]),
         Group("DEV", layout='monadtall',
             matches=[Match(wm_class=['jetbrains-idea-ce'])]),
-        Group("SYS", layout='columns'),
+        Group("LTX", layout='monadtall'),
         Group("COM", layout='treetab', 
             matches=[Match(wm_class=['Microsoft Teams - Preview']),
                      Match(wm_class=['discord'])]),
-        Group("6", layout='columns'),
+        Group("SYS", layout='columns'),
         Group("7", layout='columns'),
+        Group("8", layout='columns'),
         ]
 
 # Add simple key bindings for changing workspace

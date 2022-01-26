@@ -1,0 +1,72 @@
+snippet begindoc "Begin document with packages" b
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[export]{adjustbox}
+\renewcommand{\figurename}{Figur} % Figure format
+\renewcommand{\thesection}{Opgave \arabic{section}} % Section format
+
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{Side \thepage \hspace{1pt} af \pageref{LastPage}}
+\fancypagestyle{firststyle}
+
+\title{${1:Document title}}
+\author{Daniel Brasholt s214675}
+\date{`date "+%B %Y"`}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{fancy}
+
+\section{${2:Section title}}
+
+$0
+
+\end{document}
+endsnippet
+
+snippet fig "Begin figure" b
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{${1:path}}
+	\caption{${2:caption}}
+	\label{fig:${3:label}}
+\end{figure}
+
+$0
+endsnippet
+
+snippet eqn "Begin equation" b
+\begin{align}
+	$1 
+\end{align}
+
+$0
+endsnippet
+
+snippet beg "Begin environment" b
+\begin{${1:env}}
+	$2
+\end{$1}
+
+$0
+endsnippet
+
+snippet // "Begin fraction" iA
+\frac{$1}{$2} $0
+endsnippet

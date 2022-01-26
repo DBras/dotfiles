@@ -26,6 +26,10 @@ set matchtime=4                   " For how long is match shown?
 set spelllang=en_gb,da            " Spell check UK English and Danish
 set textwidth=80                  " Used by colour column
 set colorcolumn=+1                " Show column at text width +1
+
+let maplocalleader = ","
+let mapleader = ","
+
 call plug#begin('~/.config/nvim/autoload/plugged')
 
 Plug 'vim-airline/vim-airline'    " Bottom airline
@@ -43,6 +47,7 @@ Plug 'hrsh7th/nvim-cmp'           " cmp: completion plugin
 Plug 'quangnguyen30192/cmp-nvim-ultisnips' " UltiSnips plugin for cmp
 Plug 'sirver/UltiSnips'           " Add support for snippets
 Plug 'nvim-treesitter/nvim-treesitter' " Tree sitter plugin
+Plug 'lervag/vimtex'
 
 call plug#end()
 
@@ -75,7 +80,10 @@ nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 let g:UltiSnipsExpandTrigger = '<C-Space>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-let g:UltiSnipsEditSplit= "vertical"
+let g:UltiSnipsEditSplit = 'vertical'
+" VimTex 
+let g:vimtex_view_method = 'zathura'
+map <leader>c :VimtexCompile<CR>
 
 luafile ~/.config/nvim/lua/nvim-cmp.lua
 
