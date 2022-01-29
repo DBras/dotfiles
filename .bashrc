@@ -92,6 +92,9 @@ alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles exce
 alias la='ls -A'
 alias altcode="$HOME/.local/bin/altcode-master/altcode -o clipboard -s rofi"
 alias sshot="scrot --select ~/Pictures/scrot/temporary.png && xclip -se c -t image/png -i ~/Pictures/scrot/temporary.png && rm ~/Pictures/scrot/temporary.png"
+alias cnvim="nvim ~/.config/nvim/init.vim"
+alias cqtile="nvim ~/.config/qtile/config.py"
+alias ckeys="nvim ~/.config/qtile/keys.py"
 
 export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
 colorscript random # Print random colorscript on start

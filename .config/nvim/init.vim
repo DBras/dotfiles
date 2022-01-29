@@ -27,7 +27,7 @@ set spelllang=en_gb,da            " Spell check UK English and Danish
 set textwidth=80                  " Used by colour column
 set colorcolumn=+1                " Show column at text width +1
 
-let maplocalleader = ","
+let maplocalleader = ","          " Set leader keys used by eg. vimtex
 let mapleader = ","
 
 call plug#begin('~/.config/nvim/autoload/plugged')
@@ -47,7 +47,7 @@ Plug 'hrsh7th/nvim-cmp'           " cmp: completion plugin
 Plug 'quangnguyen30192/cmp-nvim-ultisnips' " UltiSnips plugin for cmp
 Plug 'sirver/UltiSnips'           " Add support for snippets
 Plug 'nvim-treesitter/nvim-treesitter' " Tree sitter plugin
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex'              " Used to compile and edit LaTeX
 
 call plug#end()
 
