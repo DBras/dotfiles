@@ -95,6 +95,8 @@ alias sshot="scrot --select ~/Pictures/scrot/temporary.png && xclip -se c -t ima
 alias cnvim="nvim ~/.config/nvim/init.vim"
 alias cqtile="nvim ~/.config/qtile/config.py"
 alias ckeys="nvim ~/.config/qtile/keys.py"
+alias cbash="nvim ~/.bashrc"
+alias initnote="mkdir notes && cd notes && mkdir img && nvim"
 
 export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
 colorscript random # Print random colorscript on start

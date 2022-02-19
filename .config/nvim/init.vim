@@ -21,7 +21,6 @@ set updatetime=300                " How often to write to buffer. Default 4000
 set undofile                      " Set persistent undo
 set numberwidth=2                 " Width of number column. Default 4. Larger if necessary
 set nowrap                        " Too large line is not wrapped
-set showmatch                     " Show matching parenthesis when adding
 set matchtime=4                   " For how long is match shown?
 set spelllang=en_gb,da            " Spell check UK English and Danish
 set textwidth=80                  " Used by colour column
@@ -103,3 +102,4 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 " If document is markdown, convert to pdf
 :autocmd BufWritePost *.md silent !$HOME/.config/nvim/markdown/savepdf.sh "%:p"
+:autocmd BufEnter *.md silent set spell
