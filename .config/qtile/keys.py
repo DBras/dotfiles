@@ -131,4 +131,9 @@ keys = [
     Key([], 'XF86AudioMute',
             lazy.spawn('ponymix toggle'),
             desc='Toggle audio mute'),
+
+    # Lock screen
+    Key([mod, 'mod1'], 'l',
+            lazy.spawn('xdotool key ctrl+alt+F1'),
+            desc='Lock screen with XDoTool'),
 ]
