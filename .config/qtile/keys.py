@@ -61,6 +61,9 @@ keys = [
     Key([mod], 'y',
         lazy.window.toggle_floating(),
         desc='Toggle floating window'),
+    Key([mod], 'm',
+        lazy.window.toggle_fullscreen(),
+        desc='Toggle fullscreen window'),
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
