@@ -47,6 +47,11 @@ Plug 'quangnguyen30192/cmp-nvim-ultisnips' " UltiSnips plugin for cmp
 Plug 'sirver/UltiSnips'           " Add support for snippets
 Plug 'nvim-treesitter/nvim-treesitter' " Tree sitter plugin
 Plug 'lervag/vimtex'              " Used to compile and edit LaTeX
+Plug 'kosayoda/nvim-lightbulb'    " Show lightbulb when context action available
+Plug 'weilbith/nvim-code-action-menu' " Show menu for code actions
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'windwp/nvim-autopairs'      " Auto-pairing of \")[ etc
+Plug 'chentau/marks.nvim'         " Better marks usage
 
 call plug#end()
 
@@ -73,6 +78,13 @@ vim.api.nvim_set_keymap('n', 'm', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 vim.api.nvim_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+
+-- lsp_signature 
+cfg = {}
+require "lsp_signature".setup(cfg)
+
+require('nvim-autopairs').setup{}
+require('marks').setup{}
 EOF
 
 :colorscheme dracula              " Set colour scheme to Dracula

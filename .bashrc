@@ -97,6 +97,8 @@ alias cqtile="nvim ~/.config/qtile/config.py"
 alias ckeys="nvim ~/.config/qtile/keys.py"
 alias cbash="nvim ~/.bashrc"
 alias initnote="mkdir notes && cd notes && mkdir img && nvim"
+alias skcon="sudo wg-quick up wg0"
+alias skdis="sudo wg-quick down wg0"
 
 export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
 colorscript random # Print random colorscript on start
