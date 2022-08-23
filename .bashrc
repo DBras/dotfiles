@@ -99,6 +99,7 @@ alias cbash="nvim ~/.bashrc"
 alias initnote="mkdir notes && cd notes && mkdir img && nvim"
 alias skcon="sudo wg-quick up wg0"
 alias skdis="sudo wg-quick down wg0"
+alias "r-notebook"="sudo docker run -p 8888:8888 --network=host jupyter/r-notebook"
 
 export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
 colorscript random # Print random colorscript on start
