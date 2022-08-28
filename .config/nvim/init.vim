@@ -12,7 +12,6 @@ set smartindent                   " Smarter indenting (works best for C)
 set autoindent                    " Auto indent when helpful
 set noexpandtab                   " Tabs are not expanded to spaces
 set smartcase                     " When searching, case sensitive if upper case is used
-" set clipboard+=unnamedplus        " Copy to system clipboard
 set mouse=a                       " Enable mouse actions
 set foldmethod=indent             " Indenting can fold
 set foldlevel=9                   " Default fold level
@@ -35,7 +34,7 @@ Plug 'vim-airline/vim-airline'    " Bottom airline
 Plug 'unblevable/quick-scope'     " Highlight unique characters for f/F
 Plug 'tpope/vim-commentary'       " Smart commenting
 Plug 'tpope/vim-surround'         " Change surrounding characters
-Plug 'preservim/nerdtree'         " File tree
+" Plug 'preservim/nerdtree'         " File tree
 Plug 'dracula/vim'                " Colour scheme
 Plug 'preservim/tagbar'           " Use ctags to display overview of tags
 Plug 'neovim/nvim-lspconfig'      " NeoVim LSP plugin
@@ -52,8 +51,19 @@ Plug 'weilbith/nvim-code-action-menu' " Show menu for code actions
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'windwp/nvim-autopairs'      " Auto-pairing of \")[ etc
 Plug 'chentau/marks.nvim'         " Better marks usage
+Plug 'nvim-telescope/telescope.nvim'  " Telescope
+Plug 'fhill2/telescope-ultisnips.nvim' " Telescope ultisnips
+Plug 'nvim-lua/plenary.nvim'      " Needed for telescope
+Plug 'kyazdani42/nvim-web-devicons'   " Adds coloured icons
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' } " Adds bufferline
+Plug 'github/copilot.vim'         " Github Copilot
+Plug 'kyazdani42/nvim-tree.lua'   " File tree plugin
 
 call plug#end()
+
+" Change copilot from tab
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
 
 " Execute below as lua. Enables python LSP server
 lua << EOF
@@ -65,8 +75,8 @@ require'nvim-treesitter.configs'.setup {
 	disable = {"vim"},
   },
 }
-local opts = { noremap=true, silent=true }
 
+local opts = { noremap=true, silent=true }
 -- LSP key bindings
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
@@ -78,25 +88,38 @@ vim.api.nvim_set_keymap('n', 'm', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 vim.api.nvim_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+
+-- Telescope key bindings
+vim.api.nvim_set_keymap('n', '<space>f', '<cmd>Telescope find_files<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>c', '<cmd>Telescope treesitter<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>t', '<cmd>Telescope<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>j', '<cmd>Telescope jumplist<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>u', '<cmd>Telescope ultisnips<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>s', '<cmd>Telescope live_grep<CR>', opts)
+
+-- NvimTree key bindings
+vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-f>', ':NvimTreeFocus<CR>', opts)
 
 -- lsp_signature 
+vim.opt.termguicolors = true
+require('bufferline').setup{}
 cfg = {}
 require "lsp_signature".setup(cfg)
 
 require('nvim-autopairs').setup{}
 require('marks').setup{}
+require('bufferline').setup{}
+require('telescope').load_extension('ultisnips')
+require('nvim-tree').setup{}
 EOF
 
 :colorscheme dracula              " Set colour scheme to Dracula
 
 " NerdTree
-nnoremap <C-f> :NERDTreeFocus<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-h> :wincmd h<CR>
-nnoremap <C-l> :wincmd l<CR>
-" LSP 
+"nnoremap <C-f> :NERDTreeFocus<CR>
+"nnoremap <C-t> :NERDTreeToggle<CR>
+"nnoremap <C-n> :NERDTree<CR>
 " UltiSnips
 let g:UltiSnipsExpandTrigger = '<C-Space>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
@@ -105,8 +128,18 @@ let g:UltiSnipsEditSplit = 'vertical'
 " VimTex 
 let g:vimtex_view_method = 'zathura'
 map <leader>c :VimtexCompile<CR>
+" bufferline
+nnoremap <silent>[b :BufferLineCyclePrev<CR>
+nnoremap <silent>]b :BufferLineCycleNext<CR>
+nnoremap <silent><space>be :BufferLineSortByExtension<CR>
+nnoremap <silent><space>bd :BufferLineSortByDirectory<CR>
+nnoremap <silent>[B :BufferLineMovePrev<CR>
+nnoremap <silent>]B :BufferLineMoveNext<CR>
+nnoremap <silent><C-h> :wincmd h<CR>
+nnoremap <silent><C-l> :wincmd l<CR>
 
 luafile ~/.config/nvim/lua/nvim-cmp.lua
+luafile ~/.config/nvim/Telescope/init.lua
 
 nmap <F8> :TagbarToggle<CR>
 
