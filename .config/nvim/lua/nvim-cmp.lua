@@ -8,6 +8,7 @@
   end
 
   local cmp = require'cmp'
+  local lspkind = require('lspkind')
 
   cmp.setup({
     snippet = {
@@ -19,6 +20,18 @@
         vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = 'text_symbol',
+			maxwidth = 50,
+			preset = 'codicons',
+
+			--before = function (entry, vim_item)
+			--...
+				--return vim_item
+			--end
+		})
+	},
     mapping = {
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),

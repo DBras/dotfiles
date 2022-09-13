@@ -104,3 +104,5 @@ alias "r-notebook"="sudo docker run -p 8888:8888 --network=host jupyter/r-notebo
 export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
 colorscript random # Print random colorscript on start
 eval "$(starship init bash)" # Start starship prompt
+
+export QSYS_ROOTDIR="/home/daniel/intelFPGA_lite/21.1/quartus/sopc_builder/bin"

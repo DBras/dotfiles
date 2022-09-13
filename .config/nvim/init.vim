@@ -34,9 +34,7 @@ Plug 'vim-airline/vim-airline'    " Bottom airline
 Plug 'unblevable/quick-scope'     " Highlight unique characters for f/F
 Plug 'tpope/vim-commentary'       " Smart commenting
 Plug 'tpope/vim-surround'         " Change surrounding characters
-" Plug 'preservim/nerdtree'         " File tree
 Plug 'dracula/vim'                " Colour scheme
-Plug 'preservim/tagbar'           " Use ctags to display overview of tags
 Plug 'neovim/nvim-lspconfig'      " NeoVim LSP plugin
 Plug 'hrsh7th/cmp-nvim-lsp'       " LSP plugin for cmp
 Plug 'hrsh7th/cmp-buffer'         " Buffer plugin for cmp
@@ -58,6 +56,9 @@ Plug 'kyazdani42/nvim-web-devicons'   " Adds coloured icons
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' } " Adds bufferline
 Plug 'github/copilot.vim'         " Github Copilot
 Plug 'kyazdani42/nvim-tree.lua'   " File tree plugin
+Plug 'sudormrfbin/cheatsheet.nvim' " Cheatsheet in Telescope
+Plug 'lewis6991/gitsigns.nvim'    " Show markers for git (added, modified etc)
+Plug 'onsails/lspkind.nvim'       " Show symbols in cmp-list
 
 call plug#end()
 
@@ -96,12 +97,14 @@ vim.api.nvim_set_keymap('n', '<space>t', '<cmd>Telescope<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>j', '<cmd>Telescope jumplist<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>u', '<cmd>Telescope ultisnips<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>s', '<cmd>Telescope live_grep<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>m', '<cmd>Telescope marks<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>?', '<cmd>Cheatsheet<CR>', opts)
 
 -- NvimTree key bindings
 vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-f>', ':NvimTreeFocus<CR>', opts)
 
--- lsp_signature 
+-- lsp_signature
 vim.opt.termguicolors = true
 require('bufferline').setup{}
 cfg = {}
@@ -112,6 +115,7 @@ require('marks').setup{}
 require('bufferline').setup{}
 require('telescope').load_extension('ultisnips')
 require('nvim-tree').setup{}
+require('gitsigns').setup{}
 EOF
 
 :colorscheme dracula              " Set colour scheme to Dracula
@@ -125,7 +129,7 @@ let g:UltiSnipsExpandTrigger = '<C-Space>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 let g:UltiSnipsEditSplit = 'vertical'
-" VimTex 
+" VimTex
 let g:vimtex_view_method = 'zathura'
 map <leader>c :VimtexCompile<CR>
 " bufferline
@@ -137,24 +141,25 @@ nnoremap <silent>[B :BufferLineMovePrev<CR>
 nnoremap <silent>]B :BufferLineMoveNext<CR>
 nnoremap <silent><C-h> :wincmd h<CR>
 nnoremap <silent><C-l> :wincmd l<CR>
+" abbreviations
+cnoreabbrev showwhitespace highlight ExtraWhitespace ctermbg=red guibg=red|match ExtraWhitespace /\s\+$/
+cnoreabbrev hidewhitespace hi clear ExtraWhitespace
 
 luafile ~/.config/nvim/lua/nvim-cmp.lua
 luafile ~/.config/nvim/Telescope/init.lua
 
-nmap <F8> :TagbarToggle<CR>
-
 " Auto install plugin manager if not present
-if empty(glob('~/.config/nvim/autoload/plug.vim'))   
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
 	silent !curl -flo ~/.config/nvim/autoload/plug.vim --create-dirs
 		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync
 endif
 
 " Auto run PlugInstall
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) 
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 	\| PlugInstall --sync | source $MYVIMRC
 	\| endif
 
 " If document is markdown, convert to pdf
-:autocmd BufWritePost *.md silent !$HOME/.config/nvim/markdown/savepdf.sh "%:p"
-:autocmd BufEnter *.md silent set spell
+autocmd BufWritePost *.md silent !$HOME/.config/nvim/markdown/savepdf.sh "%:p"
+autocmd BufEnter *.md silent set spell
