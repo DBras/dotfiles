@@ -108,7 +108,7 @@ keys = [
             lazy.spawn('pcmanfm'),
             desc='Launch pcmanfm (graphical file manager)'),
     Key([mod], 'r',
-            lazy.spawn('alacritty -e ranger /home/daniel/Dropbox/DTU/E22'),
+            lazy.spawn('alacritty -e ranger /home/daniel/Dropbox/DTU/F23'),
             desc='Launch ranger in current notes directory'),
 
     # Scratchpad shortcuts

@@ -48,7 +48,7 @@ Plug 'kosayoda/nvim-lightbulb'    " Show lightbulb when context action available
 Plug 'weilbith/nvim-code-action-menu' " Show menu for code actions
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'windwp/nvim-autopairs'      " Auto-pairing of \")[ etc
-Plug 'chentau/marks.nvim'         " Better marks usage
+Plug 'chentoast/marks.nvim'         " Better marks usage
 Plug 'nvim-telescope/telescope.nvim'  " Telescope
 Plug 'fhill2/telescope-ultisnips.nvim' " Telescope ultisnips
 Plug 'nvim-lua/plenary.nvim'      " Needed for telescope
@@ -59,6 +59,7 @@ Plug 'kyazdani42/nvim-tree.lua'   " File tree plugin
 Plug 'sudormrfbin/cheatsheet.nvim' " Cheatsheet in Telescope
 Plug 'lewis6991/gitsigns.nvim'    " Show markers for git (added, modified etc)
 Plug 'onsails/lspkind.nvim'       " Show symbols in cmp-list
+Plug 'folke/which-key.nvim'       " Help with keybindings
 
 call plug#end()
 
@@ -69,14 +70,14 @@ let g:copilot_no_tab_map = v:true
 " Execute below as lua. Enables python LSP server
 lua << EOF
 -- require'lspconfig'.pyright.setup{}
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-	disable = {"vim"},
-  },
-}
-
+--require'nvim-treesitter.configs'.setup {
+--  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+--  highlight = {
+--    enable = true,              -- false will disable the whole extension
+--	disable = {"vim"},
+--  },
+-- }
+--
 local opts = { noremap=true, silent=true }
 -- LSP key bindings
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
@@ -98,6 +99,8 @@ vim.api.nvim_set_keymap('n', '<space>j', '<cmd>Telescope jumplist<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>u', '<cmd>Telescope ultisnips<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>s', '<cmd>Telescope live_grep<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>m', '<cmd>Telescope marks<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>q', '<cmd>Telescope quickfix<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>w', '<cmd>Telescope buffers<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>?', '<cmd>Cheatsheet<CR>', opts)
 
 -- NvimTree key bindings
@@ -116,14 +119,11 @@ require('bufferline').setup{}
 require('telescope').load_extension('ultisnips')
 require('nvim-tree').setup{}
 require('gitsigns').setup{}
+require('which-key').setup{}
 EOF
 
 :colorscheme dracula              " Set colour scheme to Dracula
 
-" NerdTree
-"nnoremap <C-f> :NERDTreeFocus<CR>
-"nnoremap <C-t> :NERDTreeToggle<CR>
-"nnoremap <C-n> :NERDTree<CR>
 " UltiSnips
 let g:UltiSnipsExpandTrigger = '<C-Space>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
@@ -132,6 +132,7 @@ let g:UltiSnipsEditSplit = 'vertical'
 " VimTex
 let g:vimtex_view_method = 'zathura'
 map <leader>c :VimtexCompile<CR>
+map <leader>lv :VimtexView<CR>
 " bufferline
 nnoremap <silent>[b :BufferLineCyclePrev<CR>
 nnoremap <silent>]b :BufferLineCycleNext<CR>
@@ -139,8 +140,10 @@ nnoremap <silent><space>be :BufferLineSortByExtension<CR>
 nnoremap <silent><space>bd :BufferLineSortByDirectory<CR>
 nnoremap <silent>[B :BufferLineMovePrev<CR>
 nnoremap <silent>]B :BufferLineMoveNext<CR>
-nnoremap <silent><C-h> :wincmd h<CR>
-nnoremap <silent><C-l> :wincmd l<CR>
+nnoremap <silent><leader>h :wincmd h<CR>
+nnoremap <silent><leader>j :wincmd j<CR>
+nnoremap <silent><leader>k :wincmd k<CR>
+nnoremap <silent><leader>l :wincmd l<CR>
 " abbreviations
 cnoreabbrev showwhitespace highlight ExtraWhitespace ctermbg=red guibg=red|match ExtraWhitespace /\s\+$/
 cnoreabbrev hidewhitespace hi clear ExtraWhitespace

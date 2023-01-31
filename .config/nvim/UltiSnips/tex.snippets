@@ -1,39 +1,20 @@
-snippet begindoc "Begin document with packages" b
-\documentclass{article}
-\usepackage[utf8]{inputenc}
+# ------------------------------ #
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+endglobal
+# ------------------------------ #
 
-% Set page size and margins
-% Replace `letterpaper' with`a4paper' for UK/EU standard size
-\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{mathtools}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{caption}
-\usepackage{fancyhdr}
-\usepackage{lastpage}
-\usepackage[export]{adjustbox}
-\renewcommand{\figurename}{Figur} % Figure format
-\renewcommand{\thesection}{Opgave \arabic{section}} % Section format
+snippet begindoc "Begin document" bA
+%! TEX root = main.tex
 
-\pagestyle{fancy}
-\fancyhf{}
-\rfoot{Side \thepage \hspace{1pt} af \pageref{LastPage}}
-\fancypagestyle{firststyle}
-
-\title{${1:Document title}}
-\author{Daniel Brasholt s214675}
-\date{`date "+%B %Y"`}
-
-\begin{document}
-
-\maketitle
-
-\thispagestyle{fancy}
-
-\section{${2:Section title}}
+\newcommand{\titl}{${1:Title}}
+\newcommand{\auth}{Daniel Brasholt s214675}
+\newcommand{\courseno}{${2:Course number}}
+\newcommand{\course}{${3:Course name}}
+\newcommand{\dato}{${4:Date}}
+\input{preamble.tex}
 
 $0
 
@@ -43,7 +24,7 @@ endsnippet
 snippet fig "Begin figure" b
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{${1:path}}
+	\includegraphics[width=0.8\textwidth]{${1:path}}
 	\caption{${2:caption}}
 	\label{fig:${3:label}}
 \end{figure}
@@ -51,7 +32,7 @@ snippet fig "Begin figure" b
 $0
 endsnippet
 
-snippet eqn "Begin equation" b
+snippet nn "Begin equation" bA
 \begin{align}
 	$1 
 \end{align}
@@ -59,7 +40,7 @@ snippet eqn "Begin equation" b
 $0
 endsnippet
 
-snippet beg "Begin environment" b
+snippet env "Begin environment" b
 \begin{${1:env}}
 	$2
 \end{$1}
@@ -67,6 +48,86 @@ snippet beg "Begin environment" b
 $0
 endsnippet
 
-snippet // "Begin fraction" iA
+snippet tt "\texttt{} command"
+\texttt{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet bf "\textbf{} command"
+\textbf{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet it "\textit{} command"
+\textit{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet hr "Hyperref package's \href{}{} command"
+\href{${1:url}}{${2:display name}}$0
+endsnippet
+
+snippet "(^|[^a-zA-ZæÆøØåÅ])mm" "Inline LaTeX math" rA
+`!p snip.rv = match.group(1)`\$ ${1:${VISUAL:}} \$$0
+endsnippet
+
+snippet "(^|[^a-zA-ZæÆøØåÅ])rr" "Inline reference" rA
+`!p snip.rv = match.group(1)`\ref{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet || "Verb environment" A
+\verb|$1| $0
+endsnippet
+
+snippet sec "New section" bA
+\section{${1:Heading}}
+
+$0
+endsnippet
+
+snippet ssec "New subsection" bA
+\subsection{${1:Heading}}
+
+$0
+endsnippet
+
+snippet sssec "New subsubsection" bA
+\subsubsection{${1:Heading}}
+
+$0
+endsnippet
+
+snippet todo "Todo command" bA
+\todo{$1}$0
+endsnippet
+
+# ---------------- #
+# MATH #
+# ---------------- #
+
+context "math()"
+snippet ff "Begin fraction" iA
 \frac{$1}{$2} $0
+endsnippet
+
+context "math()"
+snippet ee "Expand e^{}" iA
+e^{$1}$0
+endsnippet
+
+context "math()"
+snippet int "Expand \int_{}^{}" iA
+\int_{$1}^{$2}{$3}$0
+endsnippet
+
+context "math()"
+snippet inf "Expand \infty" iA
+\infty$0
+endsnippet
+
+context "math()"
+snippet __ "Expand _{}" iA
+_{$1}$0
+endsnippet
+
+context "math()"
+snippet ^ "Expand ^{}" iA
+^{$1}$0
 endsnippet
