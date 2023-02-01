@@ -105,6 +105,7 @@ alias 34338="cd ~/Dropbox/DTU/E22/34338"
 alias 34210="cd ~/Dropbox/DTU/F23/34210"
 alias 34359="cd ~/Dropbox/DTU/F23/34359"
 alias 34229="cd ~/Dropbox/DTU/F23/34229"
+alias ml="cd ~/Dropbox/DTU/F23/ML"
 
 export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
 colorscript random # Print random colorscript on start

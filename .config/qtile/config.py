@@ -50,16 +50,16 @@ colors = [
 
 # Define workspaces and default layout
 groups = [
-        Group("TER", layout='bsp'),
-        Group("WWW", layout='monadtall',
+        Group("   ", layout='bsp'),
+        Group("   ", layout='monadtall',
             matches=[Match(wm_class=['firefox'])]),
-        Group("DEV", layout='monadtall',
+        Group("   ", layout='monadtall',
             matches=[Match(wm_class=['jetbrains-idea-ce'])]),
-        Group("LTX", layout='monadtall'),
-        Group("COM", layout='treetab', 
+        Group(" ⌨ ", layout='monadtall'),
+        Group("  ✆  ", layout='treetab', 
             matches=[Match(wm_class=['Microsoft Teams - Preview']),
                      Match(wm_class=['discord'])]),
-        Group("SYS", layout='columns'),
+        Group(" ⌘  ", layout='columns'),
         Group("7", layout='columns'),
         Group("8", layout='columns'),
         ]

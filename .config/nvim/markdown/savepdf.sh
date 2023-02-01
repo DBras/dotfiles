@@ -14,8 +14,9 @@ pandoc --pdf-engine=xelatex $1 \
 	-V geometry:margin=2cm \
 	-V mainfont="DejaVu Serif" \
 	-V monofont="DejaVu Sans Mono" \
+	-V fontsize=12pt \
 	--resource-path=$OUTPUT \
 	--highlight-style zenburn \
 	-H $HOME/.config/nvim/markdown/disable_float.tex \
-	--toc \
+	#--toc \
 	&
