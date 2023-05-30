@@ -1,0 +1,6 @@
+[
+	{
+		"name": "NeoVim",
+		"command": "alacritty --hold -e ~/.config/nvim/init.vim"
+	}
+]

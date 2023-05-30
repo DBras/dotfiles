@@ -80,6 +80,15 @@ _open_files_for_editing() {
 # alias pacdiff=eos-pacdiff
 ################################################################################
 
+#### Auto-run ssh-agent on bash start
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+	    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+	    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+
+#### Some aliases for convenience.
 alias maple='/opt/maple2021/bin/xmaple'
 alias dotconfig='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias fehr='feh -g 1280x720+1280 -.'
@@ -87,8 +96,8 @@ alias scrotclip='scrot -s ~/foo.png \
 	&& xclip -sel clip -t image/png ~/foo.png \
 	&& rm ~/foo.png'
 alias ls='ls --color=auto'
-alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
-alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
+alias l='ls -lavh --ignore=..'   # show long listing of all except ".."
+alias ll='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
 alias la='ls -A'
 alias altcode="$HOME/.local/bin/altcode-master/altcode -o clipboard -s rofi"
 alias sshot="scrot --select ~/Pictures/scrot/temporary.png && xclip -se c -t image/png -i ~/Pictures/scrot/temporary.png && rm ~/Pictures/scrot/temporary.png"
@@ -99,13 +108,18 @@ alias cbash="nvim ~/.bashrc"
 alias initnote="mkdir notes && cd notes && mkdir img && nvim"
 alias skcon="sudo wg-quick up wg0"
 alias skdis="sudo wg-quick down wg0"
-alias "r-notebook"="sudo docker run -p 8888:8888 --network=host jupyter/r-notebook"
+alias venv="source venv/bin/activate"
+alias beginlatex="mkdir img && cp ~/Dropbox/DTU/latex/preamble.tex . && cp ~/Dropbox/DTU/latex/img/DTU.eps img/DTU.eps && echo -e \"%! TEX root = main.tex\n\n\" > main.tex && nvim main.tex"
+alias startssh='eval "$(ssh-agent -s)"'
+alias refile='nvim ~/Documents/gollum-wiki/wikimd/refile.md'
 
 alias 34338="cd ~/Dropbox/DTU/E22/34338"
 alias 34210="cd ~/Dropbox/DTU/F23/34210"
 alias 34359="cd ~/Dropbox/DTU/F23/34359"
 alias 34229="cd ~/Dropbox/DTU/F23/34229"
+alias 10020="cd ~/Dropbox/DTU/F23/10020"
 alias ml="cd ~/Dropbox/DTU/F23/ML"
+alias wiki='cd ~/Documents/gollum-wiki/wikimd'
 
 export PATH="/home/daniel/.local/bin:$PATH" # Add .local/bin to PATH
 colorscript random # Print random colorscript on start

@@ -52,7 +52,7 @@ keys = [
     Key([mod, 'control'], 'j',
         lazy.layout.grow_down(),
         desc='Grow window down'),
-    Key([mod, 'control'], 'k', 
+    Key([mod, 'control'], 'k',
         lazy.layout.grow_up(),
         desc='Grow window up'),
     Key([mod], 'n',
@@ -142,4 +142,18 @@ keys = [
     Key([mod, 'mod1'], 'l',
             lazy.spawn('xdotool key ctrl+alt+F1'),
             desc='Lock screen with XDoTool'),
+
+    # Screenshot
+    Key([], 'Print',
+            lazy.spawn('screenshot clipboard'),
+            desc='Take screenshot and copy to clipboard'),
+    Key(['shift'], 'Print',
+            lazy.spawn('screenshot select'),
+            desc='Take screenshot of selected area and save to folder'),
+    Key(['control'], 'Print',
+            lazy.spawn('screenshot'),
+            desc='Take screenshot of entire screen and save to folder'),
+    Key([mod], 'Print',
+            lazy.spawn('scrotmenu'),
+            desc='Show rofi scrot menu'),
 ]

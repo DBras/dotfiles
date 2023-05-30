@@ -58,8 +58,11 @@ groups = [
         Group(" ⌨ ", layout='monadtall'),
         Group("  ✆  ", layout='treetab', 
             matches=[Match(wm_class=['Microsoft Teams - Preview']),
-                     Match(wm_class=['discord'])]),
-        Group(" ⌘  ", layout='columns'),
+                     Match(wm_class=['discord']),
+                     Match(wm_class=['Signal']),
+                     Match(wm_class=['Zotero'])
+                     ]),
+        Group("  ⌘  ", layout='columns'),
         Group("7", layout='columns'),
         Group("8", layout='columns'),
         ]

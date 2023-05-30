@@ -17,6 +17,6 @@ pandoc --pdf-engine=xelatex $1 \
 	-V fontsize=12pt \
 	--resource-path=$OUTPUT \
 	--highlight-style zenburn \
-	-H $HOME/.config/nvim/markdown/disable_float.tex \
-	#--toc \
+	-H $HOME/.config/nvim/markdown/disable_float.tex &
+	# --toc \
 	&
