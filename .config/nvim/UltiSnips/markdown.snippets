@@ -14,10 +14,12 @@ snippet dateh "Insert current date" b
 $0
 endsnippet
 
-snippet titleh "Insert title, author and date" ib 
-% ${1:Title}
-% Daniel Brasholt s214675
-% `date +"%A %d.%m.%y"`
+snippet titleh "Insert title, author and date" ibA
+---
+title: ${1:Title}
+author: Daniel Brasholt s214675
+date: `date +"%A %d.%m.%y"`
+---
 
 # $1
 

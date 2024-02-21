@@ -59,7 +59,7 @@ vim.g.vimtex_toc_config = {
 	show_numbers=1,
 	mode=2
 }
-vim.g.vimtex_quickfix_mode = 2
+vim.g.vimtex_quickfix_mode = 0
 vim.g.vimtex_quickfix_ignore_filters = {}
 vim.g.vimtex_quickfix_autoclose_after_keystrokes = 2
 

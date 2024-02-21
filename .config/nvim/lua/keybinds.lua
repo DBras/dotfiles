@@ -88,5 +88,4 @@ k({'n', '<leader>mf' , '<cmd>lua MiniMap.toggle_focus()<CR>'}          , s_n)
 
 -- Miscellaneous
 ----------------------------------------------
-
 k({'n', '<leader>h' , '<cmd>noh<CR>'}                                  , s_n)

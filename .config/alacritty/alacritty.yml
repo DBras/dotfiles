@@ -3,16 +3,16 @@ import:
 font:
   size: 10.0
   normal:
-    family: SourceCodePro
+    family: JetbrainsMonoNerdFont
     style: Regular
   bold:
-    family: SourceCodePro
+    family: JetbrainsMonoNerdFont
     style: Bold
   italic:
-    family: SourceCodePro
+    family: JetbrainsMonoNerdFont
     style: Italic
   bold_italic:
-    family: SourceCodePro
+    family: JetbrainsMonoNerdFont
     style: Bold Italic
 key_bindings:
   - { key: Return, mods: Control|Shift, action: SpawnNewInstance }

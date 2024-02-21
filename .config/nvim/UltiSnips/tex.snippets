@@ -29,6 +29,7 @@ snippet begindoc "Begin document" bA
 \newcommand{\subsecheader}{${7:Opg}}
 \newcommand{\sourcefile}{${8:bibtex.bib}}
 \input{preamble.tex}
+\graphicspath{{./img/}}
 
 $0
 
@@ -46,7 +47,7 @@ endsnippet
 snippet fig "Begin figure" bA
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{../img/${1:path}}
+	\includegraphics[width=0.8\textwidth]{${1:path}}
 	\caption{${2:caption}}
 	\label{fig:${3:label}}
 \end{figure}

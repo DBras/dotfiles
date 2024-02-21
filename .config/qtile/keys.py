@@ -1,9 +1,9 @@
 import subprocess
 from libqtile.config import Key
 from libqtile.command import lazy
-from libqtile import extension
 
 mod = 'mod4'
+TERMINAL = 'alacritty'
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -93,7 +93,7 @@ keys = [
 
     # Custom spawns
     Key([mod], 'Return',
-            lazy.spawn('alacritty'),
+            lazy.spawn(TERMINAL),
             desc='Launch terminal'),
     Key([mod], 'b',
             lazy.spawn('firefox'),
@@ -108,7 +108,7 @@ keys = [
             lazy.spawn('pcmanfm'),
             desc='Launch pcmanfm (graphical file manager)'),
     Key([mod], 'r',
-            lazy.spawn('alacritty -e ranger /home/daniel/Dropbox/DTU/F23'),
+            lazy.spawn(f'{TERMINAL} -e ranger /home/daniel/Dropbox/DTU/F23'),
             desc='Launch ranger in current notes directory'),
 
     # Scratchpad shortcuts

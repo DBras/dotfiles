@@ -71,6 +71,8 @@ Plug 'echasnovski/mini.nvim'	  " Collection of small plugins
 Plug 'stevearc/dressing.nvim' 
 Plug 'projekt0n/github-nvim-theme'
 Plug 'j-hui/fidget.nvim'
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate'}
+Plug 'williamboman/mason-lspconfig.nvim'
 
 call plug#end()
 
@@ -91,7 +93,7 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "all", 
   highlight = {
     enable = true,
-	disable = {"vim"},
+	disable = { "vim", "latex", "markdown" },
   },
  }
 --
@@ -131,7 +133,6 @@ require('muren').setup{
 		do_replace = '<S-q>'
 		}
 }
-require('fidget').setup{}
 require('telescope-init')
 require('neo-tree-config')
 require('neorg-config')
@@ -153,7 +154,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 	\| endif
 
 " If document is markdown, convert to pdf
-autocmd BufWritePost *.md silent !$HOME/.config/nvim/markdown/savepdf.sh "%:p"
+" autocmd BufWritePost *.md silent !$HOME/.config/nvim/markdown/savepdf.sh "%:p"
 autocmd BufEnter *.md silent set spell
 autocmd BufEnter *.md silent let b:table_mode_corner='+'
 autocmd BufEnter *.md silent let b:table_mode_corner_corner='+'
